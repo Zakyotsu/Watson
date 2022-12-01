@@ -35,7 +35,7 @@ class LinkDAO extends DAO
             FROM tl_liens 
             ORDER BY lien_id DESC
         ";
-        $result = $this->getDb()->fetchAll($sql);
+        $result = $this->getDb()->fetchAllAssociative($sql);
 
         // Convert query result to an array of domain objects
         $_links = array();
@@ -80,7 +80,7 @@ class LinkDAO extends DAO
             FROM tl_liens 
             WHERE lien_id = ?
         ";
-        $row = $this->getDb()->fetchAssoc($sql, array($id));
+        $row = $this->getDb()->fetchAssociative($sql, array($id));
 
         if ($row){
             return $this->buildDomainObject($row);
@@ -104,7 +104,7 @@ class LinkDAO extends DAO
                 ON tl_tags_liens.lien_id = tl_liens.lien_id
             WHERE tl_tags_liens.tag_id = ?
         ";
-        $result = $this->getDb()->fetchAll($sql, array($id));
+        $result = $this->getDb()->fetchAllAssociative($sql, array($id));
 
         // Convert query result to an array of domain objects
         $_links = array();

@@ -21,7 +21,7 @@ class UserDAO extends DAO implements UserProviderInterface
             FROM tl_users 
             ORDER BY usr_name
         ";
-        $result = $this->getDb()->fetchAll($sql);
+        $result = $this->getDb()->fetchAllAssociative($sql);
 
         // Convert query result to an array of domain objects
         $entities = array();
@@ -40,7 +40,7 @@ class UserDAO extends DAO implements UserProviderInterface
     public function findUsersByRange($elementsPerPage, $pageNumber) {
         $page = $pageNumber - 1;
         
-        $sql = "SELECT * FROM tl_users ORDER BY usr_name LIMIT ".$elementsPerPage*$page.", ".$elementsPerPage;
+        $sql = "SELECT * FROM tl_users ORDER BY usr_id DESC LIMIT ".$elementsPerPage*$page.", ".$elementsPerPage;
        
         $result = $this->getDb()->fetchAllAssociative($sql);
 
@@ -73,7 +73,7 @@ class UserDAO extends DAO implements UserProviderInterface
         $query->bindValue('start', $start, \PDO::PARAM_INT);
         $query->bindValue('quantite', $usersPerPage, \PDO::PARAM_INT);
         $query->execute();
-        $result = $query->fetchAll();
+        $result = $query->fetchAllAssociative();
 
         $_users = array();
         foreach($result as $row) {
@@ -97,7 +97,7 @@ class UserDAO extends DAO implements UserProviderInterface
             FROM tl_users 
             WHERE usr_id = ?
         ";
-        $row = $this->getDb()->fetchAssoc($sql, array($id));
+        $row = $this->getDb()->fetchAssociative($sql, array($id));
 
         if ($row){
             return $this->buildDomainObject($row);
@@ -151,7 +151,7 @@ class UserDAO extends DAO implements UserProviderInterface
             FROM tl_users 
             WHERE usr_name = ?
         ";
-        $row = $this->getDb()->fetchAssoc($sql, array($username));
+        $row = $this->getDb()->fetchAssociative($sql, array($username));
 
         if ($row){
             return $this->buildDomainObject($row);

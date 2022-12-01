@@ -15,8 +15,8 @@ $app->get('/login', "Watson\Controller\HomeController::loginAction")->bind('logi
 // Admin zone
 $app->get('/admin', "Watson\Controller\AdminController::indexAction")->bind('admin');
 
-// Display another page
-$app->match('/admin/link/page/{page}', "Watson\Controller\AdminController::displayLinkPage")->bind('admin_link_page');
+// Display another link page
+$app->match('/admin/link/{page}', "Watson\Controller\AdminController::listLinksAction")->bind('admin_links');
 
 // Add a new link
 $app->match('/admin/link/add', "Watson\Controller\AdminController::addLinkAction")->bind('admin_link_add');
@@ -26,6 +26,9 @@ $app->match('/admin/link/{id}/edit', "Watson\Controller\AdminController::editLin
 
 // Remove a link
 $app->get('/admin/link/{id}/delete', "Watson\Controller\AdminController::deleteLinkAction")->bind('admin_link_delete');
+
+// Display another user page
+$app->match('/admin/user/{page}', "Watson\Controller\AdminController::listUsersAction")->bind('admin_users');
 
 // Add a user
 $app->match('/admin/user/add', "Watson\Controller\AdminController::addUserAction")->bind('admin_user_add');
