@@ -12,17 +12,37 @@ use Watson\Form\Type\UserType;
 
 class AdminController {
 
+    private int $page = 1;
+
     /**
      * Admin home page controller.
      *
      * @param Application $app Silex application
      */
     public function indexAction(Application $app) {
-        $links = $app['dao.link']->findAll();
-        $users = $app['dao.user']->findAll();
+        $links = $app['dao.link']->findLinksByRange(10, $this->page);
+        $users = $app['dao.user']->findUsersByRange(10, $this->page);
         return $app['twig']->render('admin.html.twig', array(
             'links' => $links,
-            'users' => $users));
+            'users' => $users,
+            'page' => $this->page));
+    }
+
+    /**
+     * Display next page
+     *
+     * @param Request $request Incoming request
+     * @param Application $app Silex application
+     */
+    public function displayLinkPage($page, Request $request, Application $app) {
+        var_dump($page);
+       
+        $links = $app['dao.link']->findLinksByRange(10, $this->page);
+
+        return $app['twig']->render('admin.html.twig', array(
+            'links' => $links,
+            'users' => null,
+            'page' => $this->page));
     }
 
     /**
@@ -225,5 +245,25 @@ class AdminController {
 
         // Redirect to admin home page
         return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+    /**
+     * Get the value of page
+     */ 
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set the value of page
+     *
+     * @return  self
+     */ 
+    public function setPage($page)
+    {
+        $this->page = $page;
+
+        return $this;
     }
 }

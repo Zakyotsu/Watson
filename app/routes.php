@@ -15,6 +15,9 @@ $app->get('/login', "Watson\Controller\HomeController::loginAction")->bind('logi
 // Admin zone
 $app->get('/admin', "Watson\Controller\AdminController::indexAction")->bind('admin');
 
+// Display another page
+$app->match('/admin/link/page/{page}', "Watson\Controller\AdminController::displayLinkPage")->bind('admin_link_page');
+
 // Add a new link
 $app->match('/admin/link/add', "Watson\Controller\AdminController::addLinkAction")->bind('admin_link_add');
 

@@ -32,9 +32,30 @@ class UserDAO extends DAO implements UserProviderInterface
         return $entities;
     }
 
+    /**
+     * Return a list of users, sorted by username, with a defined range.
+     *
+     * @return array A list of the selected users.
+     */
+    public function findUsersByRange($elementsPerPage, $pageNumber) {
+        $page = $pageNumber - 1;
+        
+        $sql = "SELECT * FROM tl_users ORDER BY usr_name LIMIT ".$elementsPerPage*$page.", ".$elementsPerPage;
+       
+        $result = $this->getDb()->fetchAllAssociative($sql);
+
+        // Convert query result to an array of domain objects
+        $entities = array();
+        foreach ($result as $row) {
+            $id            = $row['usr_id'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+        return $entities;
+    }
+
     public function countAll() {
         $sql = "SELECT COUNT(usr_id) as total FROM tl_users";
-        $result = $this->getDb()->fetchAssoc($sql);
+        $result = $this->getDb()->fetchAssociative($sql);
 
         return (int) $result['total'];
     }

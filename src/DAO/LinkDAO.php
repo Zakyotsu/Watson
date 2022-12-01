@@ -47,6 +47,27 @@ class LinkDAO extends DAO
     }
 
     /**
+     * Return a list of all links, sorted by date (most recent first), with a defined range.
+     *
+     * @return array A list of the selected links.
+     */
+    public function findLinksByRange($elementsPerPage, int $pageNumber) {
+        $page = $pageNumber - 1;
+        
+        $sql = "SELECT * FROM tl_liens ORDER BY lien_id DESC LIMIT ".$elementsPerPage*$page.", ".$elementsPerPage;
+
+        $result = $this->getDb()->fetchAllAssociative($sql);
+
+        // Convert query result to an array of domain objects
+        $_links = array();
+        foreach ($result as $row) {
+            $linkId          = $row['lien_id'];
+            $_links[$linkId] = $this->buildDomainObject($row);
+        }
+        return $_links;
+    }
+
+    /**
      * Returns a link matching the supplied id.
      *
      * @param integer $id The link id.
