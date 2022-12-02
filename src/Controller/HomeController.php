@@ -66,4 +66,16 @@ class HomeController {
             )
         );
     }
+
+    /**
+     * Link details controller.
+     *
+     * @param Application $app Silex application
+     */
+    public function rssAction(Application $app) {
+        $links = $app['dao.link']->findLinksByRange(15, 1);
+        return $app['twig']->render('rss.xml.twig', array(
+            'links' => $links
+        ));
+    }
 }
