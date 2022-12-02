@@ -12,37 +12,27 @@ use Watson\Form\Type\UserType;
 
 class AdminController {
 
-    private int $page = 1;
-
     /**
      * Admin home page controller.
      *
      * @param Application $app Silex application
      */
     public function indexAction(Application $app) {
-        $links = $app['dao.link']->findLinksByRange(10, $this->page);
-        $users = $app['dao.user']->findUsersByRange(10, $this->page);
-        return $app['twig']->render('admin.html.twig', array(
-            'links' => $links,
-            'users' => $users,
-            'page' => $this->page));
+        return $app['twig']->render('admin.html.twig');
     }
 
     /**
-     * Display next page
+     * List links
      *
      * @param Request $request Incoming request
      * @param Application $app Silex application
      */
-    public function displayLinkPage($page, Request $request, Application $app) {
-        var_dump($page);
-       
-        $links = $app['dao.link']->findLinksByRange(10, $this->page);
+    public function listLinksAction($page, Request $request, Application $app) {
+        $links = $app['dao.link']->findLinksByRange(10, $page);
 
-        return $app['twig']->render('admin.html.twig', array(
+        return $app['twig']->render('admin_links.html.twig', array(
             'links' => $links,
-            'users' => null,
-            'page' => $this->page));
+            'page' => $page));
     }
 
     /**
@@ -169,6 +159,20 @@ class AdminController {
         
         // Redirect to admin home page
         return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+    /**
+     * List users
+     *
+     * @param Request $request Incoming request
+     * @param Application $app Silex application
+     */
+    public function listUsersAction($page, Request $request, Application $app) {
+        $users = $app['dao.user']->findUsersByRange(10, $page);
+
+        return $app['twig']->render('admin_users.html.twig', array(
+            'users' => $users,
+            'page' => $page));
     }
 
     /**
