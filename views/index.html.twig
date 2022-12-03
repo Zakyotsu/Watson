@@ -19,4 +19,9 @@
 			</div>
 		{% endfor %}
 	</div>
+    <div class="pagination">
+        <a href="{{ path('home', { 'page': page-1 }) }}" class="pagination-button">{{ page-1 }}</a>
+        <p class="pagination-bigbutton">{{ page }}</p>
+        <a href="{{ path('home', { 'page': page+1 }) }}" class="pagination-button">{{ page+1 }}</a>
+    </div>
 {% endblock %}

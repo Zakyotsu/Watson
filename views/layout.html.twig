@@ -18,12 +18,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" id="logo" href="{{ path('home') }}">Watson</a>
+                    <a class="navbar-brand" id="logo" href="{{ path('home', { 'page': page }) }}">Watson</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user and is_granted('ROLE_ADMIN') %}
-                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
+                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin' , { 'page' : page }) }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
                         {% endif %}
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="dropdown">
@@ -37,8 +37,13 @@
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b></a>
+<<<<<<< HEAD
                              <ul class="dropdown-menu">
                                     <li><a href="{{ path('login') }}">Log in</a></li>
+=======
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('login', { 'page' : page} ) }}">Log in</a></li>
+>>>>>>> 9753159f27ad526e74a335eb484b01a2d7bc988d
                                 </ul>
                             </li>
                         {% endif %}

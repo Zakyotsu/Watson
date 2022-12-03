@@ -17,8 +17,12 @@ class AdminController {
      *
      * @param Application $app Silex application
      */
-    public function indexAction(Application $app) {
-        return $app['twig']->render('admin.html.twig');
+    public function indexAction($page, Application $app) {
+        $links = $app['dao.link']->findLinksByRange(12, $page);
+        return $app['twig']->render('admin_links.html.twig', array(
+            'links' => $links,
+            'page'  => $page
+        ));
     }
 
     /**
@@ -28,7 +32,7 @@ class AdminController {
      * @param Application $app Silex application
      */
     public function listLinksAction($page, Request $request, Application $app) {
-        $links = $app['dao.link']->findLinksByRange(10, $page);
+        $links = $app['dao.link']->findLinksByRange(12, $page);
 
         return $app['twig']->render('admin_links.html.twig', array(
             'links' => $links,
