@@ -1,6 +1,6 @@
 <?php
 /**Connection */
-$co = new PDO('mysql:host=localhost;dbname=watson;charset=utf8','admin','Gsx12isj82Y7');
+$co = new PDO('mysql:host=localhost;dbname=watson;charset=utf8','watson','watson');
 $sql = " SELECT * FROM tl_liens ORDER BY lien_id DESC LIMIT 15";
 $result = $co->prepare($sql);
 $result->execute();
