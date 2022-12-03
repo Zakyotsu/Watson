@@ -1,15 +1,17 @@
-body { 
-    padding-top: 100px; 
+body {
+    padding-top: 100px;
+    color: red;
+    background-color: #1B2034;
 }
 
-#logo{
-	width:230px;
-	height: 0;
-	display: block;
-	overflow: hidden;
-	padding-top: 76px;
-	font-size: 0;
-	background: url("../images/logo.png") no-repeat center center;
+#logo {
+    width: 230px;
+    height: 0;
+    display: block;
+    overflow: hidden;
+    padding-top: 76px;
+    font-size: 0;
+    background: url("../images/logo.png") no-repeat center center;
 }
 
 .footer {
@@ -19,66 +21,55 @@ body {
     margin-top: 30px;
 }
 
-.articleTitle:hover, .articleTitle:focus {
+#errorPanel {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+a {
+    color: #CFD6E6;
+    text-transform: uppercase;
+}
+
+a:hover {
+    color: #929292;
+}
+
+.articleTitle:hover,
+.articleTitle:focus {
     text-decoration: none;
 }
 
 .adminTable {
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-#errorPanel {
-    padding-top: 30px;
-    padding-bottom: 10px;
-}
-
-.pagination {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.pagination-button {
-    background-color: #5bc0de;
     color: black;
-    margin: 0 2px 0 2px;
-    padding: 1px 5px;
-    font-size: 18px;
-    line-height: 1.5;
-    border: 1px solid black;
-    border-radius: 3px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    vertical-align: middle;
 }
 
-.pagination-button:hover {
-    background-color: #337ab7;
-}
-
-.pagination-bigbutton {
-    background-color: #5bc0de;
+.table {
+    font-family: Comic Sans, Comic Sans MS, cursif;
+    width: 100%;
+    background-color: #ffffff;
     color: black;
-    margin: 0 2px 0 2px;
-    font-size: 26px;
-    line-height: 1.5;
-    border: 1px solid black;
-    border-radius: 3px;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    vertical-align: middle;
 }
 
-.admin-panel {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.table td,
+.table th {
+    padding: 8px;
 }
 
-.admin-panel-a {
-    font-size: 24px;
-    margin: 0 10px 0 10px;
+.table tr:nth-child(even) {
+    background-color: #e4e4e4;
+}
+
+.table tr:hover {
+    background-color: #c5c5c5;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #212429;
+    color: white;
 }
