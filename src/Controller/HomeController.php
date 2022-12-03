@@ -12,9 +12,12 @@ class HomeController {
      *
      * @param Application $app Silex application
      */
-    public function indexAction(Application $app) {
-        $links = $app['dao.link']->findAll();
-        return $app['twig']->render('index.html.twig', array('links' => $links));
+    public function indexAction($page, Application $app) {
+        $links = $app['dao.link']->findLinksByRange(12, $page);
+        return $app['twig']->render('index.html.twig', array(
+            'links' => $links,
+            'page'  => $page
+        ));
     }
 
     /**
@@ -59,10 +62,11 @@ class HomeController {
      * @param Request $request Incoming request
      * @param Application $app Silex application
      */
-    public function loginAction(Request $request, Application $app) {
+    public function loginAction($page, Request $request, Application $app) {
         return $app['twig']->render('login.html.twig', array(
             'error'         => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
+            'page' => 1
             )
         );
     }
