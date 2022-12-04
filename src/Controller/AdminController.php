@@ -19,11 +19,12 @@ class AdminController {
      */
     public function indexAction($page, Application $app) {
         $links = $app['dao.link']->findLinksByRange(12, $page);
-        return $app['twig']->render('admin_links.html.twig', array(
+        return $app['twig']->render('admin.html.twig', array(
             'links' => $links,
             'page'  => $page
         ));
     }
+
 
     /**
      * List links
@@ -253,6 +254,28 @@ class AdminController {
 
         // Redirect to admin home page
         return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+   /**public function logoutAction($page, Request $request, Application $app) {
+        $page = 1;
+        $links = $app['dao.link']->findLinksByRange(12, $page);
+        return $app['twig']->render('index.html.twig', array(
+            'error'         => $app['security.last_error']($request),
+            'links' => $links,
+            'page' => 1
+           
+            )
+        );
+    } */ 
+     public function logoutAction($page, Request $request, Application $app) {
+       
+        $links = $app['dao.link']->findLinksByRange(12, $page);
+        return $app['twig']->render('index.html.twig', array(
+            'links' => $links,
+            'page' => $page
+            )
+        );
+       
     }
 
     /**
