@@ -7,8 +7,8 @@
 <h2 class="text-center">{{ block('title') }}</h2>
 
 <div class="admin-panel">
-    <a href="/admin/link/1" class="admin-panel-a">Liste des liens</a>
-    <a href="/admin/user/1" class="admin-panel-a">Liste des utilisateurs</a>
+    <a href="{{ path('admin_links', { 'page': 1 }) }}" class="admin-panel-a">Liste des liens</a>
+    <a href={{ path('admin_users', { 'page': 1 }) }} class="admin-panel-a">Liste des utilisateurs</a>
 </div>
 
 {% endblock %}

@@ -126,3 +126,13 @@ body {
     font-size: 24px;
     margin: 0 10px 0 10px;
 }
+
+.seemore {
+    display: flex;
+    justify-content: center;
+}
+
+.seemore-a {
+    margin: 30px 0 0 0;
+    font-size: 24px;
+}

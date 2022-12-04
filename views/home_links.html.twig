@@ -20,8 +20,14 @@
 		{% endfor %}
 	</div>
     <div class="pagination">
-        <a href="{{ path('links', { 'page': page-1 }) }}" class="pagination-button">{{ page-1 }}</a>
+		{% if page-1 != 0 %}
+        	<a href="{{ path('links', { 'page': page-1 }) }}" class="pagination-button">{{ page-1 }}</a>			
+		{% endif %}
+
         <p class="pagination-bigbutton">{{ page }}</p>
-        <a href="{{ path('links', { 'page': page+1 }) }}" class="pagination-button">{{ page+1 }}</a>
+
+		{% if nbElementsNext >= 1 %}
+        	<a href="{{ path('links', { 'page': page+1 }) }}" class="pagination-button">{{ page+1 }}</a>			
+		{% endif %}
     </div>
 {% endblock %}

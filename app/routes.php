@@ -22,7 +22,7 @@ $app->get('/login', "Watson\Controller\HomeController::loginAction")->bind('logi
 $app->get('/admin', "Watson\Controller\AdminController::indexAction")->bind('admin');
 
 // Display another link page
-$app->match('/admin/link/{page}', "Watson\Controller\AdminController::listLinksAction")->bind('admin_links');
+$app->match('/admin/link/list/{page}', "Watson\Controller\AdminController::listLinksAction")->bind('admin_links');
 
 // Add a new link
 $app->match('/admin/link/add', "Watson\Controller\AdminController::addLinkAction")->bind('admin_link_add');
@@ -34,7 +34,7 @@ $app->match('/admin/link/{id}/edit', "Watson\Controller\AdminController::editLin
 $app->get('/admin/link/{id}/delete', "Watson\Controller\AdminController::deleteLinkAction")->bind('admin_link_delete');
 
 // Display another user page
-$app->match('/admin/user/{page}', "Watson\Controller\AdminController::listUsersAction")->bind('admin_users');
+$app->match('/admin/user/list/{page}', "Watson\Controller\AdminController::listUsersAction")->bind('admin_users');
 
 // Add a user
 $app->match('/admin/user/add', "Watson\Controller\AdminController::addUserAction")->bind('admin_user_add');

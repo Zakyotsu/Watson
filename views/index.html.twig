@@ -19,5 +19,7 @@
 			</div>
 		{% endfor %}
 	</div>
-	<a href="{{ path('links', { 'page': 1 }) }}">Voir plus</a>
+	<div class="seemore">
+		<a href="{{ path('links', { 'page': 1 }) }}" class="seemore-a">Voir plus</a>
+	</div>
 {% endblock %}

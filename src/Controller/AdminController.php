@@ -29,11 +29,14 @@ class AdminController {
      * @param Application $app Silex application
      */
     public function listLinksAction($page, Request $request, Application $app) {
-        $links = $app['dao.link']->findLinksByRange(12, $page);
+        $links = $app['dao.link']->findLinksByRange(15, $page);
+        $nextLinks = $app['dao.link']->findLinksByRange(15, $page+1);
 
         return $app['twig']->render('admin_links.html.twig', array(
             'links' => $links,
-            'page' => $page));
+            'page'  => $page,
+            'nbElementsNext' => count($nextLinks)
+        ));
     }
 
     /**
@@ -159,7 +162,7 @@ class AdminController {
         $app['session']->getFlashBag()->add('success', 'The link was succesfully removed.');
         
         // Redirect to admin home page
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect($app['url_generator']->generate('admin_links', array('page' => 1)));
     }
 
     /**
@@ -169,11 +172,14 @@ class AdminController {
      * @param Application $app Silex application
      */
     public function listUsersAction($page, Request $request, Application $app) {
-        $users = $app['dao.user']->findUsersByRange(10, $page);
+        $users = $app['dao.user']->findUsersByRange(15, $page);
+        $nextLinks = $app['dao.user']->findUsersByRange(15, $page+1);
 
         return $app['twig']->render('admin_users.html.twig', array(
             'users' => $users,
-            'page' => $page));
+            'page'  => $page,
+            'nbElementsNext' => count($nextLinks)
+        ));
     }
 
     /**
@@ -249,7 +255,7 @@ class AdminController {
         $app['session']->getFlashBag()->add('success', 'The user (and associated links) was succesfully removed.');
 
         // Redirect to admin home page
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect($app['url_generator']->generate('admin_users', array('page' => 1)));
     }
 
     /**

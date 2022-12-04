@@ -28,9 +28,11 @@ class HomeController {
      */
     public function homeLinksList($page, Application $app) {
         $links = $app['dao.link']->findLinksByRange(15, $page);
+        $nextLinks = $app['dao.link']->findLinksByRange(15, $page+1);
         return $app['twig']->render('home_links.html.twig', array(
             'links' => $links,
-            'page'  => $page
+            'page'  => $page,
+            'nbElementsNext' => count($nextLinks)
         ));
     }
 
