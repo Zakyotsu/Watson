@@ -1,7 +1,10 @@
 <?php
 
 // Home page
-$app->get('/{page}', "Watson\Controller\HomeController::indexAction")->bind('home');
+$app->get('/', "Watson\Controller\HomeController::indexAction")->bind('home');
+
+// Home page
+$app->get('/links/{page}', "Watson\Controller\HomeController::homeLinksList")->bind('links');
 
 // Show rss feed
 $app->match('/rss', "Watson\Controller\HomeController::rssAction")->bind('rss');
@@ -13,13 +16,10 @@ $app->match('/link/{id}', "Watson\Controller\HomeController::linkAction")->bind(
 $app->match('/tag/{id}', "Watson\Controller\HomeController::tagAction")->bind('tag');
 
 // Login form
-$app->get('/login/{page}', "Watson\Controller\HomeController::loginAction")->bind('login');
-
-// Logout form
-$app->get('/home/{page}', "Watson\Controller\AdminController::logoutAction")->bind('logout');
+$app->get('/login', "Watson\Controller\HomeController::loginAction")->bind('login');
 
 // Admin zone
-$app->get('/admin/{page}', "Watson\Controller\AdminController::indexAction")->bind('admin');
+$app->get('/admin', "Watson\Controller\AdminController::indexAction")->bind('admin');
 
 // Display another link page
 $app->match('/admin/link/{page}', "Watson\Controller\AdminController::listLinksAction")->bind('admin_links');

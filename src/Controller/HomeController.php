@@ -4,6 +4,8 @@ namespace Watson\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use DOMDocument;
+
 
 class HomeController {
 
@@ -12,9 +14,21 @@ class HomeController {
      *
      * @param Application $app Silex application
      */
-    public function indexAction($page, Application $app) {
-        $links = $app['dao.link']->findLinksByRange(12, $page);
+    public function indexAction(Application $app) {
+        $links = $app['dao.link']->findLinksByRange(3, 1);
         return $app['twig']->render('index.html.twig', array(
+            'links' => $links
+        ));
+    }
+
+    /**
+     * Home page links details.
+     *
+     * @param Application $app Silex application
+     */
+    public function homeLinksList($page, Application $app) {
+        $links = $app['dao.link']->findLinksByRange(15, $page);
+        return $app['twig']->render('home_links.html.twig', array(
             'links' => $links,
             'page'  => $page
         ));
@@ -71,19 +85,6 @@ class HomeController {
         );
     }
 
-    public function logoutAction($page, Request $request, Application $app) {
-       $page = 0;
-        $links = $app['dao.link']->findLinksByRange(12, $page);
-        return $app['twig']->render('index.html.twig', array(
-            'links' => $links,
-            'page' => $page
-           
-            )
-        );
-       
-    }
-
-
     /**
      * Link details controller.
      *
@@ -91,8 +92,33 @@ class HomeController {
      */
     public function rssAction(Application $app) {
         $links = $app['dao.link']->findLinksByRange(15, 1);
+
+        $rss = '
+        <?xml version="1.0" encoding="utf-8"?>
+        <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+            <channel>
+                <title>Lien Watson</title>
+                <link>http://localhost:1234/</link>
+                <atom:link href="http://localhost:1234/rss" rel="self" type="application/rss+xml" />
+                <description>Flux rss de Watson</description>';
+
+        foreach($links as $link) {
+            $rss .= '
+            <item>
+                <title>'. $link->getTitle() .'</title>
+                <link>'. $link->getUrl() .'</link>
+                <description>'. $link->getDesc() .'</description>
+            </item>
+            ';
+        }
+
+        $rss .= '
+            </channel>
+        </rss>
+        ';
+
         return $app['twig']->render('rss.xml.twig', array(
-            'links' => $links
+            'rss' => $rss
         ));
     }
 }

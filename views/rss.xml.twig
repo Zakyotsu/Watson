@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
-    <channel>
-        <title>Lien Watson</title>
-        <link>http://localhost:1234/</link>
-        <atom:link href="http://localhost:1234/rss" rel="self" type="application/rss+xml" />
-        <description>Flux rss de Watson</description>
-        {% for link in links %}
-        <item>
-            <title>{{ link.title }}</title>
-            <link>{{ link.url }}</link>
-            <description>{{ link.desc }}</description>
-        </item>
-        {% endfor %}
-    </channel>
-</rss>
+{{ rss }}

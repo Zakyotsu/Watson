@@ -17,6 +17,7 @@ foreach ($res as $re) {
 }
 $xmlFile->formatOutput = true;
 $xmlFile->save('rss.xml');
+var_dump($xmlFile);
 $lin="<a href='rss.xml'>Ici pour voir le fichier</a>";
 echo "Le flux rss à été créé ! ".$lin;
 

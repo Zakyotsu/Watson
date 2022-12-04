@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Links{% endblock %}
 
 {% block content %}
 	<div class="row">
@@ -19,5 +19,9 @@
 			</div>
 		{% endfor %}
 	</div>
-	<a href="{{ path('links', { 'page': 1 }) }}">Voir plus</a>
+    <div class="pagination">
+        <a href="{{ path('links', { 'page': page-1 }) }}" class="pagination-button">{{ page-1 }}</a>
+        <p class="pagination-bigbutton">{{ page }}</p>
+        <a href="{{ path('links', { 'page': page+1 }) }}" class="pagination-button">{{ page+1 }}</a>
+    </div>
 {% endblock %}
