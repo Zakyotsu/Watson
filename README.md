@@ -1,1 +1,1 @@
-# Le projet a pour page home : localhost:1234/1
+# Le projet a pour page home : localhost:1234
