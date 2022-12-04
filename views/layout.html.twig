@@ -18,19 +18,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" id="logo" href="{{ path('home', { 'page': page }) }}">Watson</a>
+                    <a class="navbar-brand" id="logo" href="{{ path('home', { 'page': 1 }) }}">Watson</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user and is_granted('ROLE_ADMIN') %}
-                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin' , { 'page' : page }) }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
+                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin' , { 'page' : 1 }) }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
                         {% endif %}
                         {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                                    <li><a href="{{ path('home', { 'page' : 1 }) }}">Logout</a></li>
                                 </ul>
                             </li>
                         {% else %}
@@ -38,7 +38,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ path('login', { 'page' : page} ) }}">Log in</a></li>
+                                    <li><a href="{{ path('login', { 'page' : 1} ) }}">Log in</a></li>
                                 </ul>
                             </li>
                         {% endif %}

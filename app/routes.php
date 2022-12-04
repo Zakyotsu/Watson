@@ -15,6 +15,9 @@ $app->match('/tag/{id}', "Watson\Controller\HomeController::tagAction")->bind('t
 // Login form
 $app->get('/login/{page}', "Watson\Controller\HomeController::loginAction")->bind('login');
 
+// Logout form
+$app->get('/home/{page}', "Watson\Controller\AdminController::logoutAction")->bind('logout');
+
 // Admin zone
 $app->get('/admin/{page}', "Watson\Controller\AdminController::indexAction")->bind('admin');
 
